@@ -38,7 +38,7 @@ import static org.hamcrest.Matchers.*;
 })
 @RunWith(SpringRunner.class)
 @DirtiesContext
-public class AccountControllerTest {
+class AccountControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -60,7 +60,7 @@ public class AccountControllerTest {
 
 
     @BeforeEach
-    public void setup() {
+    public void setUp() {
         mapper.registerModule(new JavaTimeModule());
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS,false);
     }
