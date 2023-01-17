@@ -27,9 +27,8 @@ public class Customer {
     @Column(name = "surname", nullable = false, length = 20)
     private String surname;
 
-    @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     private List<Account> accounts;
-
 
     @Override
     public boolean equals(Object o) {
@@ -43,4 +42,5 @@ public class Customer {
     public int hashCode() {
         return Objects.hash(id, name, surname);
     }
+
 }
