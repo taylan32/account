@@ -7,6 +7,8 @@ import com.example.account.model.Customer;
 import com.example.account.repository.CustomerRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -26,6 +28,13 @@ public class CustomerService {
 
     public CustomerDto getCustomerById(String id) {
         return converter.convertToCustomerDto(findCustomerById(id));
+    }
+
+    public List<CustomerDto> getAllCustomer() {
+        return customerRepository.findAll()
+                .stream()
+                .map(converter::convertToCustomerDto)
+                .collect(Collectors.toList());
     }
 
 }

@@ -4,6 +4,7 @@ import com.example.account.model.Account;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -22,7 +23,7 @@ public class AccountDtoConverter {
                 from.getId(),
                 from.getBalance(),
                 from.getCreationDate(),
-                customerDtoConverter.convertToAccountCustomer(from.getCustomer()),
+                customerDtoConverter.convertToAccountCustomer(Optional.ofNullable(from.getCustomer())),
                 Objects.requireNonNull(
                         from.getTransactions()
                                 .stream()

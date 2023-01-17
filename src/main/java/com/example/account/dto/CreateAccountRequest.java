@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,5 +17,5 @@ public class CreateAccountRequest {
     private String customerId;
 
     @Min(value = 0, message = "Credit can not be less then 0")
-    private Long initialCredit;
+    private BigDecimal initialCredit;
 }

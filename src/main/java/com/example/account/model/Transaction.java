@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
@@ -27,12 +28,12 @@ public class Transaction {
     private TransactionType transactionType;
 
     @Column(name = "amount")
-    private Long amount;
+    private BigDecimal amount;
 
     @Column(name = "transaction_date", nullable = false)
-    private Date transactionDate;
+    private LocalDateTime transactionDate;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;
 
@@ -48,4 +49,5 @@ public class Transaction {
     public int hashCode() {
         return Objects.hash(id, transactionType, amount, transactionDate);
     }
+
 }

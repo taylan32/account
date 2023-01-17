@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.GenericGenerator;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -24,16 +26,16 @@ public class Account {
     private String id;
 
     @Column(name = "balance", nullable = false)
-    private Long balance;
+    private BigDecimal balance;
 
     @Column(name = "creation_date")
-    private Date creationDate;
+    private LocalDateTime creationDate;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<Transaction> transactions;
 
     @Override

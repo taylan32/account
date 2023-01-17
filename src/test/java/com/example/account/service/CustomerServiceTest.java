@@ -1,5 +1,6 @@
 package com.example.account.service;
 
+import com.example.account.TestSupport;
 import com.example.account.dto.CustomerDto;
 import com.example.account.dto.CustomerDtoConverter;
 import com.example.account.exception.CustomerNotFoundException;
@@ -18,7 +19,7 @@ import static org.mockito.Mockito.mock;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-public class CustomerServiceTest {
+class CustomerServiceTest extends TestSupport {
     private CustomerService customerService;
     private CustomerRepository customerRepository;
     private CustomerDtoConverter converter;
@@ -33,10 +34,10 @@ public class CustomerServiceTest {
 
     @Test
     public void testFindByCustomerId_whenCustomerIdExists_shouldReturnCustomer() {
-        Customer customer = new Customer("id","name","surname",new ArrayList<>());
+        Customer customer = generateCustomer();
 
-        Mockito.when(customerRepository.findById("id")).thenReturn(Optional.of(customer));
-        Customer result = customerService.findCustomerById("id");
+        Mockito.when(customerRepository.findById("customer-id")).thenReturn(Optional.of(customer));
+        Customer result = customerService.findCustomerById("customer-id");
         assertEquals(customer, result);
 
     }
@@ -52,13 +53,13 @@ public class CustomerServiceTest {
 
     @Test
     public void getCustomerById_whenCustomerIdExists_shouldReturnCustomerDto() {
-        Customer customer = new Customer("id","name","surname",new ArrayList<>());
-        CustomerDto customerDto = new CustomerDto("id","name","surname",new ArrayList<>());
+        Customer customer = generateCustomer();
+        CustomerDto customerDto = new CustomerDto("customer-id","customer-name","customer-surname",new ArrayList<>());
 
-        Mockito.when(customerRepository.findById("id")).thenReturn(Optional.of(customer));
+        Mockito.when(customerRepository.findById("customer-id")).thenReturn(Optional.of(customer));
         Mockito.when(converter.convertToCustomerDto(customer)).thenReturn(customerDto);
 
-        CustomerDto result = customerService.getCustomerById("id");
+        CustomerDto result = customerService.getCustomerById("customer-id");
 
         assertEquals(customerDto, result);
 
